@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form onsubmit="Submit(event)" id ="form" action="">
+        <input type="text" placeholder="name" id="name">
+        <input type="text" placeholder="category" id="category">
+        <input type="text" placeholder="image url" id="url">
+        <input type="text" placeholder="price" id="price">
+        <select name="" id="gender">
+            <option value="">select</option>
+            <option value="Male">M</option>
+            <option value="Female">F</option>
+        </select>
+        <select name="" id="sold">
+            <option value="False">False</option>
+            <option value="True">True</option>
+        </select>
+        <input type="submit" id="submit">
+    </form>
+</body>
+</html>
+<script>
+    let array = JSON.parse(localStorage.getItem("array")) || [];
+    function Submit(e){
+      e.preventDefault();
+      let form = document.getElementById("form")
+      let name = form.name.value;
+      let category = form.category.value;
+      let url = form.url.value;
+      let price = form.price.value;
+      let gender = form.gender.value;
+      let sold = form.sold.value;
+      let product = new EcomProducts(name,category,url,price,gender,sold);
+      array.push(product)
+      localStorage.setItem("array",JSON.stringify(array))
+      form.reset();
+       window.location.href="product.html"
+    }
+    function EcomProducts(n,c,u,p,g,s){
+       this.name = n;
+       this.category=c;
+       this.url = u;
+       this.price = p;
+       this.gender = g;
+       this.sold = s;
+    }
+</script>
